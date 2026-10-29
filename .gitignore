@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Secrets - never commit these
+.env
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Uploads and exports
+*.xlsx
