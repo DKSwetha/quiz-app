@@ -1,0 +1,221 @@
+
+/* ---------- General Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #e8efff, #f5f7fb);
+    color: #222;
+}
+
+/* ---------- Main Container ---------- */
+.outer {
+    display: flex;
+    width: 900px;
+    max-width: 100%;
+    min-height: 600px;
+    background-color: #fff;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- Left Section ---------- */
+.left {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background: #eef3ff;
+}
+
+.left img {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ---------- Right Section ---------- */
+.right {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 45px 50px;
+    background-color: #ffffff;
+}
+
+.right h3 {
+    width: 100%;
+    max-width: 380px;
+    margin-bottom: 8px;
+    color: #536dfe;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.right h2 {
+    width: 100%;
+    max-width: 380px;
+    margin-bottom: 28px;
+    color: #172554;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+/* ---------- Signup Form ---------- */
+.right form {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+}
+
+.right form label {
+    margin-bottom: 8px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.right form input {
+    width: 100%;
+    height: 48px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    outline: none;
+    background-color: #f9fafb;
+    color: #111827;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s,
+                background-color 0.2s;
+}
+
+.right form input::placeholder {
+    color: #9ca3af;
+}
+
+.right form input:focus {
+    border-color: #536dfe;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(83, 109, 254, 0.12);
+}
+
+/* ---------- Signup Button ---------- */
+.right form button {
+    width: 100%;
+    height: 49px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 9px;
+    background: #536dfe;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.right form button:hover {
+    background: #4055d6;
+    transform: translateY(-2px);
+}
+
+.right form button:active {
+    transform: translateY(0);
+}
+
+.right form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ---------- Message Area ---------- */
+#message {
+    width: 100%;
+    max-width: 380px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+/* ---------- Footer ---------- */
+.right footer {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+.right footer p {
+    color: #6b7280;
+}
+
+.right footer a {
+    color: #536dfe;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.right footer a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .outer {
+        width: 480px;
+        min-height: auto;
+    }
+
+    .left {
+        display: none;
+    }
+
+    .right {
+        width: 100%;
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 400px) {
+    body {
+        padding: 12px;
+    }
+
+    .right {
+        padding: 30px 20px;
+    }
+
+    .right h2 {
+        font-size: 25px;
+    }
+
+    .right footer {
+        flex-wrap: wrap;
+    }
+}
