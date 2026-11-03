@@ -6,18 +6,9 @@ class LoginRequest(BaseModel):
     password: str
 
 
-class TokenResponse(BaseModel):
-    access_token: str
-    token_type: str = "bearer"
-    role: str
-    name: str
-
-
-class UserOut(BaseModel):
-    id: int
+class LoginResponse(BaseModel):
+    message: str
+    user_id: int
     name: str
     email: str
     role: str
-    batch: str | None = None
-
-    model_config = {"from_attributes": True}
