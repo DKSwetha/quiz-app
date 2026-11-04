@@ -40,20 +40,11 @@ loginForm.addEventListener("submit", async function (event) {
 
         saveUser(user);
 
-
-        showAlert(
-            "alertBox",
-            "Login successful! Your member account is verified.",
-            "success"
-        );
-
-        // The member dashboard has not been created yet.
-        // Add the dashboard redirect here when that page is ready.
         window.location.href = "dashboard.html";
 
     } catch (error) {
 
-        // Display backend or validation error
+       
         showAlert("alertBox", error.message, "danger");
 
     } finally {

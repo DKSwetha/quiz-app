@@ -6,6 +6,8 @@ from app.database import get_db
 from app.models import User, Role
 from app.schemas import LoginRequest, LoginResponse, RegisterRequest, RegisterResponse
 
+from sqlalchemy.exc import IntegrityError
+
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
@@ -64,7 +66,18 @@ def register(data: RegisterRequest, db: Session = Depends(get_db)):
 
     # 5. Save to PostgreSQL
     db.add(new_user)
-    db.commit()
+
+    try:
+        db.commit()
+
+    except IntegrityError:
+        db.rollback()
+
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Email already registered"
+        )
+
     db.refresh(new_user)
 
     # 6. Return response
