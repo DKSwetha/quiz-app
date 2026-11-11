@@ -1,6 +1,5 @@
-"""Dev-only: insert a test member, sample questions, a test and an assignment.
-Run from the backend folder:  python seed_dev_data.py
-Login afterwards: member@test.com / member123
+"""Dev-only: insert sample questions, a test and an assignment.
+The test is assigned to the existing member: member@gmail.com.
 """
 from datetime import datetime, timedelta, timezone
 
@@ -10,17 +9,17 @@ from app.models import Assignment, Question, Role, Test, TestQuestion, User
 
 db = SessionLocal()
 
-if db.query(User).filter(User.email == "member@test.com").first():
-    raise SystemExit("Seed data already exists.")
+member = db.query(User).filter(
+    User.email == "member@gmail.com",
+    User.role == Role.MEMBER,
+    User.is_active.is_(True)
+).first()
 
-member = User(
-    name="Test Member",
-    email="member@test.com",
-    password_hash=hash_password("member123"),
-    role=Role.MEMBER,
-    batch="Batch A",
-)
-db.add(member)
+if not member:
+    raise SystemExit("Existing member not found or inactive.")
+
+if db.query(Test).filter(Test.title == "Sample Test 1").first():
+    raise SystemExit("Sample test already exists.")
 
 sample = [
     ("Which keyword defines a function in Python?", "func", "def", "define", "lambda", "B", "Python", "def starts a function definition."),
@@ -62,4 +61,4 @@ for pos, q in enumerate(questions, start=1):
 
 db.add(Assignment(test_id=test.id, user_id=member.id))
 db.commit()
-print("Seeded: member@test.com / member123, 5 questions, 1 test, 1 assignment")
+print(f"Seeded 5 questions, 1 test and 1 assignment for {member.email}")

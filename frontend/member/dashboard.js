@@ -1,53 +1,33 @@
 
-// ========================================
-// 1. Get the logged-in member
-// ========================================
-
 const user = requireRole("member", "login.html");
 
-// Stop execution if the user is not a member
 if (!user) {
     throw new Error("Member login required");
 }
 
 
-// ========================================
-// 2. Display member information
-// ========================================
-
+// Display member information
 document.getElementById("userName").textContent = user.name;
 document.getElementById("welcomeName").textContent = user.name;
 
 
-// ========================================
-// 3. Logout functionality
-// ========================================
-
+// Logout
 document.getElementById("logoutBtn").addEventListener("click", function () {
     logout("login.html");
 });
 
 
-// ========================================
-// 4. Load dashboard data
-// ========================================
-
+// Load dashboard data
 async function loadDashboard() {
 
     try {
 
-        // Fetch dashboard information from FastAPI
         const data = await apiGet(
             `/members/${user.user_id}/dashboard`
         );
 
-        // Display assigned tests
         displayAssignedTests(data.assigned_tests || []);
-
-        // Display recent results
         displayRecentResults(data.recent_results || []);
-
-        // Update statistics
         updateStatistics(data.assigned_tests || []);
 
     } catch (error) {
@@ -70,10 +50,7 @@ async function loadDashboard() {
 }
 
 
-// ========================================
-// 5. Update dashboard statistics
-// ========================================
-
+// Update statistics
 function updateStatistics(tests) {
 
     const total = tests.length;
@@ -88,17 +65,12 @@ function updateStatistics(tests) {
     }).length;
 
     document.getElementById("totalAssigned").textContent = total;
-
     document.getElementById("completedTests").textContent = completed;
-
     document.getElementById("pendingTests").textContent = pending;
 }
 
 
-// ========================================
-// 6. Display assigned tests
-// ========================================
-
+// Display assigned tests
 function displayAssignedTests(tests) {
 
     const container = document.getElementById("assignedTests");
@@ -149,7 +121,14 @@ function displayAssignedTests(tests) {
         status.className = `test-status status-${test.status}`;
         status.textContent = test.status.replace("_", " ");
 
-        body.append(title, duration, marks, status);
+        // View Details button
+        const viewButton = document.createElement("a");
+        viewButton.className = "btn btn-primary w-100 mt-3";
+        viewButton.textContent = "View Details";
+        viewButton.href =
+            `test_details.html?test_id=${encodeURIComponent(test.test_id)}`;
+
+        body.append(title, duration, marks, status, viewButton);
         card.appendChild(body);
         column.appendChild(card);
         container.appendChild(column);
@@ -158,10 +137,7 @@ function displayAssignedTests(tests) {
 }
 
 
-// ========================================
-// 7. Display recent results
-// ========================================
-
+// Display recent results
 function displayRecentResults(results) {
 
     const container = document.getElementById("recentResults");
@@ -208,10 +184,7 @@ function displayRecentResults(results) {
 }
 
 
-// ========================================
-// 8. Format date
-// ========================================
-
+// Format date
 function formatDate(dateValue) {
 
     if (!dateValue) {
@@ -227,9 +200,5 @@ function formatDate(dateValue) {
     return date.toLocaleDateString();
 }
 
-
-// ========================================
-// 9. Start dashboard
-// ========================================
 
 loadDashboard();
