@@ -1,13 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-<<<<<<< Updated upstream
-from app.routers import auth, admin_members
-=======
 from app.routers import auth, members
 
 from app.routers import auth, admin_members, admin_questions
->>>>>>> Stashed changes
 
 app = FastAPI(title="Quiz Application API")
 
@@ -21,6 +17,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(members.router)
 app.include_router(admin_members.router)
 app.include_router(admin_questions.router)
 
