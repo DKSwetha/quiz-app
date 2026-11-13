@@ -1,0 +1,40 @@
+@import "../../shared/style.css";
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.landing-page {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background: #f4f7fb;
+}
+
+.landing-shell {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.landing-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #ffffff;
+  background: #2457f5;
+}
+
+.btn-secondary {
+  background: #0f172a;
+}

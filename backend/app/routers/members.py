@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.core.deps import require_member
 from app.database import get_db
 from app.models import User, Assignment, Test, Attempt, Role, AssignmentStatus, TestQuestion, Question, Answer
 
@@ -12,7 +13,13 @@ router = APIRouter(prefix="/members", tags=["members"])
 MINUTES_PER_QUESTION = 2
 
 @router.get("/{user_id}/dashboard")
-def get_member_dashboard(user_id: int, db: Session = Depends(get_db)):
+def get_member_dashboard(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_member),
+):
+    if current_user.id != user_id:
+        raise HTTPException(status_code=403, detail="You can only access your own dashboard")
 
     # 1. Check whether the member exists
     user = db.query(User).filter(
@@ -84,8 +91,11 @@ def get_member_dashboard(user_id: int, db: Session = Depends(get_db)):
 def get_test_details(
     user_id: int,
     test_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_member),
 ):
+    if current_user.id != user_id:
+        raise HTTPException(status_code=403, detail="You can only view your own assigned tests")
 
     # Check member
     user = db.query(User).filter(
@@ -153,8 +163,12 @@ def get_test_details(
 def start_test(
     user_id: int,
     test_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_member),
 ):
+    if current_user.id != user_id:
+        raise HTTPException(status_code=403, detail="You can only start your own tests")
+
     # Check member
     user = db.query(User).filter(
         User.id == user_id,
@@ -285,8 +299,12 @@ def start_test(
 def get_attempt_questions(
     user_id: int,
     attempt_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_member),
 ):
+    if current_user.id != user_id:
+        raise HTTPException(status_code=403, detail="You can only access your own attempts")
+
     # 1. Check whether the member exists
     user = db.query(User).filter(
         User.id == user_id,

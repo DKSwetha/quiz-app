@@ -12,6 +12,8 @@ class LoginResponse(BaseModel):
     name: str
     email: str
     role: str
+    access_token: str | None = None
+    token_type: str = "bearer"
 
 class RegisterRequest(BaseModel):
     name: str = Field(min_length=2, max_length=100)
@@ -43,3 +45,5 @@ class RegisterResponse(BaseModel):
     name: str
     email: str
     role: str
+    access_token: str | None = None
+    token_type: str = "bearer"

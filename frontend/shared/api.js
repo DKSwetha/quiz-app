@@ -6,11 +6,18 @@ const API_BASE = "http://localhost:8000";
 // ---------- Generic request helper ----------
 async function apiFetch(path, options = {}) {
   const { headers, ...rest } = options;
+  const authUser = getUser && getUser();
+  const authHeader = authUser && authUser.access_token ? { Authorization: `Bearer ${authUser.access_token}` } : {};
+
   let res;
   try {
     res = await fetch(API_BASE + path, {
       ...rest,
-      headers: { "Content-Type": "application/json", ...(headers || {}) },
+      headers: {
+        "Content-Type": "application/json",
+        ...(headers || {}),
+        ...authHeader,
+      },
     });
   } catch (err) {
     throw new Error("Cannot reach the server. Is the backend running?");

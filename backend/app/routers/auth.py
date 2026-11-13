@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.auth import verify_password, hash_password
+from app.core.security import create_access_token
 from app.database import get_db
 from app.models import User, Role
 from app.schemas import LoginRequest, LoginResponse, RegisterRequest, RegisterResponse
@@ -22,12 +23,16 @@ def login(data: LoginRequest, db: Session = Depends(get_db)):
     if not user.is_active:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "This account has been deactivated")
 
+    access_token = create_access_token(user.id, user.role)
+
     return LoginResponse(
         message="Login successful",
         user_id=user.id,
         name=user.name,
         email=user.email,
         role=user.role,
+        access_token=access_token,
+        token_type="bearer",
     )
 
 
@@ -81,10 +86,14 @@ def register(data: RegisterRequest, db: Session = Depends(get_db)):
     db.refresh(new_user)
 
     # 6. Return response
+    access_token = create_access_token(new_user.id, new_user.role)
+
     return RegisterResponse(
         message="Registration successful",
         user_id=new_user.id,
         name=new_user.name,
         email=new_user.email,
-        role=new_user.role
+        role=new_user.role,
+        access_token=access_token,
+        token_type="bearer",
     )
