@@ -1,5 +1,5 @@
 
-const user = requireRole("member", "login.html");
+const user = requireRole("member", "../html/login.html");
 
 if (!user) {
     throw new Error("Member login required");
@@ -13,7 +13,7 @@ document.getElementById("welcomeName").textContent = user.name;
 
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", function () {
-    logout("login.html");
+    logout("../html/login.html");
 });
 
 
@@ -126,7 +126,7 @@ function displayAssignedTests(tests) {
         viewButton.className = "btn btn-primary w-100 mt-3";
         viewButton.textContent = "View Details";
         viewButton.href =
-            `test_details.html?test_id=${encodeURIComponent(test.test_id)}`;
+            `../html/test_details.html?test_id=${encodeURIComponent(test.test_id)}`;
 
         body.append(title, duration, marks, status, viewButton);
         card.appendChild(body);

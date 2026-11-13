@@ -1,6 +1,6 @@
 
 // Check member login
-const user = requireRole("member", "login.html");
+const user = requireRole("member", "../html/login.html");
 
 if (!user) {
     throw new Error("Member login required");
@@ -11,7 +11,7 @@ document.getElementById("userName").textContent = user.name;
 
 // Handle logout
 document.getElementById("logoutBtn").addEventListener("click", function () {
-    logout("login.html");
+    logout("../html/login.html");
 });
 // Read the test ID from the URL
 const params = new URLSearchParams(window.location.search);
@@ -202,7 +202,7 @@ async function startTest() {
 
         // Open the test page with the attempt ID
         window.location.href =
-            `test.html?test_id=${encodeURIComponent(testId)}` +
+            `../html/test.html?test_id=${encodeURIComponent(testId)}` +
             `&attempt_id=${encodeURIComponent(attempt.attempt_id)}`;
 
     } catch (error) {

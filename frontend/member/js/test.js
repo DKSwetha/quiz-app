@@ -1,6 +1,6 @@
 
 // Check the logged-in member
-const user = requireRole("member", "login.html");
+const user = requireRole("member", "../html/login.html");
 
 if (!user) {
     throw new Error("Member login required");
@@ -447,7 +447,7 @@ async function submitAttempt(autoSubmit) {
             : "Your answers have been submitted successfully.";
 
         const dashboardLink = document.createElement("a");
-        dashboardLink.href = "dashboard.html";
+        dashboardLink.href = "../html/dashboard.html";
         dashboardLink.className = "btn btn-brand mt-3";
         dashboardLink.textContent = "Back to Dashboard";
 

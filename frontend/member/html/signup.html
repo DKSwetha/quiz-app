@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Member Signup | Quiz Application</title>
+
+
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+
+<body>
+
+    <main class="outer">
+
+
+        <section class="left">
+
+            <img
+                src="https://static.vecteezy.com/system/resources/thumbnails/003/689/228/small_2x/online-registration-or-sign-up-login-for-account-on-smartphone-app-user-interface-with-secure-password-mobile-application-for-ui-web-banner-access-cartoon-people-illustration-vector.jpg"
+                alt="Member registration illustration"
+            >
+
+        </section>
+
+
+
+        <section class="right">
+
+            <h3>Quiz Application</h3>
+
+            <h2>Member Signup</h2>
+
+
+
+
+
+            <div
+                id="message"
+                class="message"
+                role="alert"
+                hidden>
+            </div>
+
+
+
+            <form id="signupForm">
+
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        minlength="2"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create your password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Confirm your password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    id="signupBtn">
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+
+
+            <footer>
+
+                <p>Already have an account?</p>
+
+                <a href="./login.html">
+                    Login
+                </a>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+
+
+    <script src="../../shared/api.js"></script>
+    <script src="../js/signup.js"></script>
+
+</body>
+
+</html>

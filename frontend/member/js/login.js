@@ -40,7 +40,7 @@ loginForm.addEventListener("submit", async function (event) {
 
         saveUser(user);
 
-        window.location.href = "dashboard.html";
+        window.location.href = "../html/dashboard.html";
 
     } catch (error) {
 

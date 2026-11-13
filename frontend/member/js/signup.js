@@ -75,7 +75,7 @@ signupForm.addEventListener("submit", async function (event) {
         signupForm.reset();
 
         setTimeout(() => {
-            window.location.href = "login.html";
+            window.location.href = "../html/login.html";
         }, 1500);
 
     } catch (error) {
